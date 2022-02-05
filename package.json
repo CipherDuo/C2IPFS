@@ -1,0 +1,21 @@
+{
+  "name": "com.cipherduo.ipfs",
+  "version": "0.0.0",
+  "displayName": "CipherDuo IPFS",
+  "description": "Cipherduo C# HTTP Client\nIt communicates with the IPFS network.\nYou can write and read files from anywhere in the World.",
+  "unity": "2019.1",
+  "documentationUrl": "https://github.com/CipherDuo/C2IPFS",
+  "changelogUrl": "https://github.com/CipherDuo/C2IPFS",
+  "licensesUrl": "https://github.com/CipherDuo/C2IPFS/blob/main/LICENSE",
+  "keywords": [
+    "ipfs",
+    "cipherduo",
+    "web3"
+  ],
+  "author": {
+    "name": "CipherDuo",
+    "email": "info@cipherduo.org",
+    "url": "https://www.cipherduo.org/"
+  },
+  "type": "library"
+}
