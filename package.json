@@ -12,6 +12,9 @@
     "cipherduo",
     "web3"
   ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "2.0.0"
+  },
   "author": {
     "name": "CipherDuo",
     "email": "info@cipherduo.org",
