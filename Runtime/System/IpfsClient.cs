@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Threading;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
 using BestHTTP;
 using BestHTTP.Forms;
+#endif
+
 using CipherDuo.IPFS.Logger;
 using Ipfs.CoreApi;
 
@@ -265,6 +269,7 @@ namespace Ipfs.Http
         {
             var url = BuildCommand(command, arg, options);
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             var request = new HTTPRequest(url, HTTPMethods.Post);
             request.Send();
             logger.Log("POST {0}", url);
@@ -276,6 +281,7 @@ namespace Ipfs.Http
 
                 return body;
             }
+#else
             
             using (var response = await Api().PostAsync(url, null, cancel))
             {
@@ -284,6 +290,7 @@ namespace Ipfs.Http
                 logger.Log("RSP {0}", body);
                 return body;
             }
+#endif
         }
 
         internal Task DoCommandAsync(Uri url, CancellationToken cancel)
@@ -419,6 +426,7 @@ namespace Ipfs.Http
         {
             var url = BuildCommand(command, arg, options);
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             var request = new HTTPRequest(url, HTTPMethods.Post);
             request.Send();
             logger.Log("GET {0}", url);
@@ -427,10 +435,11 @@ namespace Ipfs.Http
             {
                 return new MemoryStream(response.Data);
             }
-            
-            //var response = await Api().PostAsync(url, new StringContent(""), cancel);
-            //await ThrowOnErrorAsync(response);
-            //return await response.Content.ReadAsStreamAsync();
+#else
+            var response = await Api().PostAsync(url, new StringContent(""), cancel);
+            await ThrowOnErrorAsync(response);
+            return await response.Content.ReadAsStreamAsync();
+#endif
         }
 
         /// <summary>
@@ -498,6 +507,7 @@ namespace Ipfs.Http
         {
             var url = BuildCommand(command, null, options);
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             var request = new HTTPRequest(url, HTTPMethods.Post);
             
             using (MemoryStream ms = new MemoryStream())
@@ -519,7 +529,7 @@ namespace Ipfs.Http
 
                 return body;
             }
-
+#else
             
             var content = new MultipartFormDataContent();
             var streamContent = new StreamContent(data);
@@ -541,6 +551,7 @@ namespace Ipfs.Http
 
                 return json;
             }
+#endif
         }
         /// <summary>
         ///   Perform an <see href="https://ipfs.io/docs/api/">IPFS API command</see> that
@@ -574,6 +585,7 @@ namespace Ipfs.Http
         {            
             var url = BuildCommand(command, null, options);
 
+#if UNITY_WEBGL && !UNITY_EDITOR
             var request = new HTTPRequest(url, HTTPMethods.Post);
             
             using (MemoryStream ms = new MemoryStream())
@@ -593,6 +605,7 @@ namespace Ipfs.Http
                 var bytes = response.Data;
                 return new MemoryStream(bytes);
             }
+#else
             
             var content = new MultipartFormDataContent();
             var streamContent = new StreamContent(data);
@@ -602,13 +615,13 @@ namespace Ipfs.Http
                 content.Add(streamContent, "file", unknownFilename);
             else
                 content.Add(streamContent, "file", name);
-
-            //var url = BuildCommand(command, null, options);
+            
             logger.Log("POST {0}", url);
 
-            //var response = await Api().PostAsync(url, content, cancel);
-            //await ThrowOnErrorAsync(response);
-            //return await response.Content.ReadAsStreamAsync();
+            var response = await Api().PostAsync(url, content, cancel);
+            await ThrowOnErrorAsync(response);
+            return await response.Content.ReadAsStreamAsync();
+#endif
         }
 
         /// <summary>
