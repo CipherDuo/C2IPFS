@@ -2,6 +2,7 @@
     "name": "CipherDuo.IPFS",
     "rootNamespace": "",
     "references": [
+        "GUID:8df2996db552b0548985bd72e2dee464",
         "GUID:9069ac25d95ca17448a247f3bb1c769f"
     ],
     "includePlatforms": [],
@@ -16,5 +17,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false
+    "noEngineReferences": true 
 }

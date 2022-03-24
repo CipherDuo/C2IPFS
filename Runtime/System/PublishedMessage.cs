@@ -5,7 +5,6 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Runtime.Serialization;
-using CipherDuo.IPFS.Serialization;
 using Newtonsoft.Json;
 
 namespace Ipfs.Http
@@ -35,7 +34,7 @@ namespace Ipfs.Http
             var sequence = (string)o["seqno"];
             var topics = (JArray) (o["topicIDs"]);
             
-            // TODO find better way to encode PubSub Messages
+            //TODO find better way to encode PubSub Messages
             this.Sender = sender;
             this.SequenceNumber = Encoding.ASCII.GetBytes(sequence);
             this.DataBytes = Encoding.ASCII.GetBytes(data);

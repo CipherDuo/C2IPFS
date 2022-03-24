@@ -26,10 +26,10 @@ namespace Ipfs.Http
         {
             var json = await ipfs.DoCommandAsync("name/publish", cancel,
                 path,
-                "lifetime=24h", // TODO
+                "lifetime=24h", //TODO
                 $"resolve={resolve.ToString().ToLowerInvariant()}",
                 $"key={key}");
-            // TODO: lifetime
+            //TODO: lifetime
             var info = JObject.Parse(json);
             return new NamedContent
             {

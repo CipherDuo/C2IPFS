@@ -9,8 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
 using Ipfs.CoreApi;
-using Newtonsoft.Json.Linq;
-using UnityEngine;
+using Newtonsoft.Json.Linq; 
 
 namespace Ipfs.Http
 {

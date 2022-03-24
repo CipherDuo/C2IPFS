@@ -3,7 +3,6 @@ using Ipfs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CipherDuo.IPFS.Logger;
 
 namespace CipherDuo.IPFS.Utility
 {
@@ -32,7 +31,7 @@ namespace CipherDuo.IPFS.Utility
         
         public static string IPFSRelayUDP = "/ip4/157.90.158.135/udp/51602/quic/p2p/12D3KooWCDGVaMNcrSFgq4LRwuJCknisZvpQGpFuec153Cg1nzC1";
 
-        private static ILog logger = LoggerFactory.GetLogger(nameof(IPFSUtility));
+        // private static ILog logger = LoggerFactory.GetLogger(nameof(IPFSUtility));
         public static Cid CalculateHash(byte[] digest)
         {
             MultiHash hash = new MultiHash("sha2-256", digest);
@@ -46,23 +45,23 @@ namespace CipherDuo.IPFS.Utility
 
             return cid;
         }
-        public static async Task<bool> PinAsync(string cid)
-        {
-            try
-            {
-
-                await IPFS.ipfsRelay.Pin.AddAsync(cid);
-                await IPFS.ipfsRelay.Dht.ProvideAsync(cid);
-                return true;
-
-            }
-            catch (Exception error)
-            {
-                logger.Log(error.Message);
-            }
-
-            return false;
-        }
+        // public static async Task<bool> PinAsync(string cid)
+        // {
+        //     try
+        //     {
+        //
+        //         await IPFS.ipfsRelay.Pin.AddAsync(cid);
+        //         await IPFS.ipfsRelay.Dht.ProvideAsync(cid);
+        //         return true;
+        //
+        //     }
+        //     catch (Exception error)
+        //     {
+        //         logger.Log(error.Message);
+        //     }
+        //
+        //     return false;
+        // }
 
     }
 }

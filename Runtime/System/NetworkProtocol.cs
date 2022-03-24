@@ -504,7 +504,7 @@ namespace Ipfs
     {
         public UInt16 RoutingPrefix { get; set; }
         public override string Name { get { return "ipcidr"; } }
-        // TODO: https://github.com/multiformats/multiaddr/issues/60
+        //TODO: https://github.com/multiformats/multiaddr/issues/60
         public override uint Code { get { return 999; } }
         public override void ReadValue(TextReader stream)
         {

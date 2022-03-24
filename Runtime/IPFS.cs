@@ -6,11 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
-using UnityEngine;
 using CipherDuo.IPFS.Constants;
 using CipherDuo.IPFS.Logger;
-using static CipherDuo.IPFS.Utility.IPFSUtility;
 using CipherDuo.IPFS.Utility;
+
+using static CipherDuo.IPFS.Utility.IPFSUtility;
 
 namespace CipherDuo.IPFS
 {
@@ -36,7 +36,7 @@ namespace CipherDuo.IPFS
             {
                 ipfsRelay = new IpfsClient(nodeUrl);
                 
-                // TODO distinguish based on nodeURL which should connect
+                //TODO distinguish based on nodeURL which should connect
                 ipfsRelay.Bootstrap.AddAsync(IPFSUtility.IPFSRelayTCP);
                 ipfsRelay.Bootstrap.AddAsync(IPFSUtility.IPFSRaspPiTCP);
                 logger.Log("Starting IPFS . . .");
